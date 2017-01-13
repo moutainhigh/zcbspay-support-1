@@ -275,5 +275,8 @@
     <module>support-trade-acc-api</module>
     <module>support-trade-acc</module>
     <module>support-trade-acc-simple</module>
+    <module>support-route-api</module>
+    <module>support-route</module>
+    <module>support-route-simple</module>
   </modules>
 </project>

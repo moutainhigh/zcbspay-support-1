@@ -1,26 +1,24 @@
 /* 
- * TradeFeeException.java  
+ * TradeRiskException.java  
  * 
  * version TODO
  *
- * 2016年11月16日 
+ * 2016年11月15日 
  * 
  * Copyright (c) 2016,zlebank.All rights reserved.
  * 
  */
-package com.zcbspay.platform.support.fee.exception;
-
-import com.zcbspay.platform.support.fee.exception.base.AbstractDescException;
+package com.zcbspay.platform.support.route.exception;
 
 /**
  * Class Description
  *
  * @author guojia
  * @version
- * @date 2016年11月16日 上午9:18:12
+ * @date 2016年11月15日 下午4:45:46
  * @since 
  */
-public class TradeFeeException extends AbstractDescException{
+public class TradeRouteException extends AbstractDescException{
 	/**
 	 * serialVersionUID
 	 */
@@ -36,18 +34,18 @@ public class TradeFeeException extends AbstractDescException{
 		return code;
 	}
 	
-	public TradeFeeException(String code,Object ... para ) {
+	public TradeRouteException(String code,Object ... para ) {
         this.params = para;
         this.code = code;
     }
 	
-	public TradeFeeException(String code) {
+	public TradeRouteException(String code) {
         this.code = code;
     }
 	/**
 	 * 
 	 */
-	public TradeFeeException() {
+	public TradeRouteException() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

@@ -2,7 +2,7 @@ package com.zcbspay.platform.support.fee.exception.base;
 
 import java.util.ResourceBundle;
 
-public abstract class AbstractTradeFeeDescException extends AbstractDescribeException{
+public abstract class AbstractDescException extends AbstractException{
 	 
     /**
 	 * 

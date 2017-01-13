@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
  * @date 2015年8月31日 下午12:12:56
  * @since
  */
-public abstract class AbstractDescribeException extends BaseException {
+public abstract class AbstractException extends BaseException {
     /**
      * serialVersionUID
      */
@@ -34,11 +34,11 @@ public abstract class AbstractDescribeException extends BaseException {
     
     public abstract String getCode();
     
-    public AbstractDescribeException() {
+    public AbstractException() {
         super();
     }
     
-    public AbstractDescribeException(Throwable cause) {
+    public AbstractException(Throwable cause) {
         super(cause);
     }
 }

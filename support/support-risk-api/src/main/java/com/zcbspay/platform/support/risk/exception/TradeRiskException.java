@@ -18,7 +18,7 @@ package com.zcbspay.platform.support.risk.exception;
  * @date 2016年11月15日 下午4:45:46
  * @since 
  */
-public class TradeRiskException extends AbstractTradeRiskDescException{
+public class TradeRiskException extends AbstractDescException{
 	/**
 	 * serialVersionUID
 	 */
