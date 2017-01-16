@@ -278,5 +278,8 @@
     <module>support-route-api</module>
     <module>support-route</module>
     <module>support-route-simple</module>
+    <module>support-fee-test</module>
+    <module>support-risk-test</module>
+    <module>support-trade-acc-test</module>
   </modules>
 </project>
