@@ -281,5 +281,8 @@
     <module>support-fee-test</module>
     <module>support-risk-test</module>
     <module>support-trade-acc-test</module>
+    <module>support-order-query</module>
+    <module>support-order-query-api</module>
+    <module>support-order-query-simple</module>
   </modules>
 </project>
