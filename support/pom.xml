@@ -284,5 +284,7 @@
     <module>support-order-query</module>
     <module>support-order-query-api</module>
     <module>support-order-query-simple</module>
+    <module>support-signature</module>
+    <module>support-signaturn-api</module>
   </modules>
 </project>
