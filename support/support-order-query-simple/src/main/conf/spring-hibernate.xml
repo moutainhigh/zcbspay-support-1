@@ -63,7 +63,7 @@
 		<!-- 注解方式配置 -->
 		<property name="packagesToScan">
 			<list>
-				<value>com.zcbspay.platform.orderinfo.query.pojo</value>
+				<value>com.zcbspay.platform.support.order.query.pojo</value>
 			</list>
 		</property>
 	</bean>

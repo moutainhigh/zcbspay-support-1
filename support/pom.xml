@@ -262,29 +262,13 @@
 		</snapshotRepository>
 	</distributionManagement>
   <modules>
-    <module>support-fee-api</module>
-    <module>support-fee</module>
-    <module>support-common</module>
-    <module>support-fee-simple</module>
-    <module>support-risk-api</module>
-    <module>support-risk</module>
-    <module>support-risk-simple</module>
     <module>support-task-api</module>
     <module>support-task</module>
     <module>support-task-simple</module>
-    <module>support-trade-acc-api</module>
-    <module>support-trade-acc</module>
-    <module>support-trade-acc-simple</module>
-    <module>support-route-api</module>
-    <module>support-route</module>
-    <module>support-route-simple</module>
-    <module>support-fee-test</module>
-    <module>support-risk-test</module>
-    <module>support-trade-acc-test</module>
     <module>support-order-query</module>
     <module>support-order-query-api</module>
     <module>support-order-query-simple</module>
     <module>support-signature</module>
-    <module>support-signaturn-api</module>
+    <module>support-signature-api</module>
   </modules>
 </project>
