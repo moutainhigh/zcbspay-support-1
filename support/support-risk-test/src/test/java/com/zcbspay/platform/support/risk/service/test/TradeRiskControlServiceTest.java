@@ -3,9 +3,9 @@ package com.zcbspay.platform.support.risk.service.test;
 import org.junit.Test;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.zcbspay.platform.support.risk.bean.RiskBean;
-import com.zcbspay.platform.support.risk.exception.TradeRiskException;
-import com.zcbspay.platform.support.risk.service.TradeRiskControlService;
+import com.zcbspay.platform.payment.risk.bean.RiskBean;
+import com.zcbspay.platform.payment.risk.exception.TradeRiskException;
+import com.zcbspay.platform.payment.risk.service.TradeRiskControlService;
 
 public class TradeRiskControlServiceTest extends BaseTest{
 

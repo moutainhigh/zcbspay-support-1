@@ -16,7 +16,7 @@
   <dependencies>
 		<dependency>
 			<groupId>com.zcbspay.platform</groupId>
-			<artifactId>support-risk-api</artifactId>
+			<artifactId>payment-risk-api</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>

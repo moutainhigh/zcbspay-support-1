@@ -3,7 +3,7 @@ package com.zcbspay.platform.support.trade.acc.service.test;
 import org.junit.Test;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.zcbspay.platform.support.trade.acc.service.TradeAccountingService;
+import com.zcbspay.platform.payment.trade.acc.service.TradeAccountingService;
 
 public class TradeAccountingServiceTest extends BaseTest{
 	

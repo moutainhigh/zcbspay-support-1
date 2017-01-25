@@ -3,9 +3,9 @@ package com.zcbspay.platform.support.fee.service.test;
 import org.junit.Test;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.zcbspay.platform.support.fee.bean.FeeBean;
-import com.zcbspay.platform.support.fee.exception.TradeFeeException;
-import com.zcbspay.platform.support.fee.service.TradeFeeService;
+import com.zcbspay.platform.payment.fee.bean.FeeBean;
+import com.zcbspay.platform.payment.fee.exception.TradeFeeException;
+import com.zcbspay.platform.payment.fee.service.TradeFeeService;
 
 public class TradeFeeServiceTest extends BaseTest{
 
