@@ -20,6 +20,7 @@ public enum BusiTypeEnum {
     transfer ("5000"),
     safeGuard("6000"),
     insteadPay("7000"),
+    concentrate("1100"),
     UNKNOW("99");
     private String code;
     

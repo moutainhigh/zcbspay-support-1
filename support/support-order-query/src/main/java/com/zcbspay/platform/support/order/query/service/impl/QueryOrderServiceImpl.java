@@ -10,18 +10,37 @@
  */
 package com.zcbspay.platform.support.order.query.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Lists;
 import com.zcbspay.platform.support.order.query.dao.InsteadPayRealtimeDAO;
+import com.zcbspay.platform.support.order.query.dao.OrderCollectBatchDAO;
+import com.zcbspay.platform.support.order.query.dao.OrderCollectDetaDAO;
+import com.zcbspay.platform.support.order.query.dao.OrderCollectSingleDAO;
+import com.zcbspay.platform.support.order.query.dao.OrderPaymentBatchDAO;
+import com.zcbspay.platform.support.order.query.dao.OrderPaymentDetaDAO;
+import com.zcbspay.platform.support.order.query.dao.OrderPaymentSingleDAO;
 import com.zcbspay.platform.support.order.query.dao.TxnsLogDAO;
 import com.zcbspay.platform.support.order.query.dao.TxnsOrderinfoDAO;
 import com.zcbspay.platform.support.order.query.enums.BusiTypeEnum;
+import com.zcbspay.platform.support.order.query.enums.OrderStatusEnum;
 import com.zcbspay.platform.support.order.query.enums.OrderType;
 import com.zcbspay.platform.support.order.query.exception.QueryOrderException;
+import com.zcbspay.platform.support.order.query.pojo.OrderCollectBatchDO;
+import com.zcbspay.platform.support.order.query.pojo.OrderCollectDetaDO;
+import com.zcbspay.platform.support.order.query.pojo.OrderCollectSingleDO;
+import com.zcbspay.platform.support.order.query.pojo.OrderPaymentBatchDO;
+import com.zcbspay.platform.support.order.query.pojo.OrderPaymentDetaDO;
+import com.zcbspay.platform.support.order.query.pojo.OrderPaymentSingleDO;
 import com.zcbspay.platform.support.order.query.pojo.PojoInsteadPayRealtime;
 import com.zcbspay.platform.support.order.query.pojo.PojoTxnsLog;
 import com.zcbspay.platform.support.order.query.pojo.PojoTxnsOrderinfo;
+import com.zcbspay.platform.support.order.query.query.bean.BatchResultBean;
+import com.zcbspay.platform.support.order.query.query.bean.FileContentBean;
 import com.zcbspay.platform.support.order.query.query.bean.OrderResultBean;
 import com.zcbspay.platform.support.order.query.query.service.QueryOrderService;
 
@@ -42,6 +61,18 @@ public class QueryOrderServiceImpl implements QueryOrderService{
 	private TxnsLogDAO txnsLogDAO;
 	@Autowired
 	private InsteadPayRealtimeDAO insteadPayRealtimeDAO;
+	@Autowired
+	private OrderCollectSingleDAO orderCollectSingleDAO;
+	@Autowired
+	private OrderPaymentSingleDAO orderPaymentSingleDAO;
+	@Autowired
+	private OrderCollectBatchDAO orderCollectBatchDAO;
+	@Autowired
+	private OrderCollectDetaDAO orderCollectDetaDAO;
+	@Autowired
+	private OrderPaymentBatchDAO orderPaymentBatchDAO;
+	@Autowired
+	private OrderPaymentDetaDAO orderPaymentDetaDAO;
 	/**
 	 *
 	 * @param merchNo
@@ -158,5 +189,151 @@ public class QueryOrderServiceImpl implements QueryOrderService{
 		order.setOrderType(code);
 		return order;
 	}
+	@Override
+	public OrderResultBean queryConcentrateCollectionOrder(String tn) throws QueryOrderException {
+		OrderCollectSingleDO orderinfo = orderCollectSingleDAO.getOrderinfoByTn(tn);
+		if(orderinfo==null){
+			throw new QueryOrderException("PC004");
+		}
+		OrderResultBean order = new OrderResultBean();
+		order.setMerId(orderinfo.getMerid());
+		order.setMerName(orderinfo.getMername());
+		order.setMerAbbr(orderinfo.getMerabbr());
+		order.setOrderId(orderinfo.getOrderid());
+		order.setTxnAmt(orderinfo.getTxnamt()+"");
+		order.setTxnTime(orderinfo.getOrdercommitime());
+		order.setOrderStatus(orderinfo.getStatus());
+		order.setOrderDesc(orderinfo.getNotes());
+		order.setCurrencyCode(orderinfo.getCurrencycode());
+		order.setTn(orderinfo.getTn());
+		return order;
+		
+	}
+	@Override
+	public OrderResultBean queryConcentratePaymentOrder(String tn) throws QueryOrderException {
+		OrderPaymentSingleDO orderinfo = orderPaymentSingleDAO.getOrderinfoByTn(tn);
+		if(orderinfo==null){
+			throw new QueryOrderException("PC004");
+		}
+		OrderResultBean order = new OrderResultBean();
+		order.setMerId(orderinfo.getMerid());
+		order.setMerName(orderinfo.getMername());
+		order.setMerAbbr(orderinfo.getMerabbr());
+		order.setOrderId(orderinfo.getOrderid());
+		order.setTxnAmt(orderinfo.getTxnamt()+"");
+		order.setTxnTime(orderinfo.getOrdercommitime());
+		order.setOrderStatus(orderinfo.getStatus());
+		order.setOrderDesc(orderinfo.getNotes());
+		order.setCurrencyCode(orderinfo.getCurrencycode());
+		order.setTn(orderinfo.getTn());
+		return order;
+	}
+	@Override
+	public BatchResultBean queryConcentrateCollectionBatch(String merchNo,
+			String batchNo, String txnDate) {
+		BatchResultBean resultBean = new BatchResultBean();
+		OrderCollectBatchDO collectBatch = orderCollectBatchDAO.getCollectBatchOrder(merchNo, batchNo, txnDate);
+		List<OrderCollectDetaDO> detaList = orderCollectDetaDAO.getDetaListByBatchtid(collectBatch.getTid());
+		List<FileContentBean> fileContentList = Lists.newArrayList();
+		long failedCount = 0L;
+		long failedAmt = 0L;
+		long successCount = 0L;
+		long successAmt = 0L;
+		long payingCount = 0L;
+		long payingAmt = 0L;
+		for(OrderCollectDetaDO collectDeta : detaList){
+			FileContentBean bean = new FileContentBean();
+			bean.setOrderId(collectDeta.getOrderid());
+			bean.setCurrencyCode(collectDeta.getCurrencycode());
+			bean.setAmt(collectDeta.getAmt());
+			bean.setDebtorBank(collectDeta.getDebtorbank());
+			bean.setDebtorAccount(collectDeta.getDebtoraccount());
+			bean.setDebtorName(collectDeta.getDebtorname());
+			bean.setDebtorConsign(collectDeta.getDebtorconsign());
+			bean.setCreditorBank(collectDeta.getCreditorbank());
+			bean.setCreditorAccount(collectDeta.getCreditoraccount());
+			bean.setCreditorName(collectDeta.getCreditorname());
+			bean.setProprietary(collectDeta.getProprietary());
+			bean.setSummary(collectDeta.getSummary());
+			OrderStatusEnum orderStatusEnum = OrderStatusEnum.fromValue(collectDeta.getStatus());
+			if(orderStatusEnum==OrderStatusEnum.FAILED){
+				failedCount++;
+				failedAmt+=Long.valueOf(bean.getAmt()).longValue();
+				bean.setRespCode("09");
+			}else if (orderStatusEnum==OrderStatusEnum.PAYING) {
+				successCount++;
+				payingAmt+=Long.valueOf(bean.getAmt()).longValue();
+				bean.setRespCode("11");
+			}else if (orderStatusEnum==OrderStatusEnum.SUCCESS) {
+				payingCount++;
+				successAmt+=Long.valueOf(bean.getAmt()).longValue();
+				bean.setRespCode("00");
+			}
+			bean.setRespMsg(collectDeta.getRespmsg());
+			fileContentList.add(bean);
+		}
+		resultBean.setFileContentList(fileContentList);
+		resultBean.setFailTotalAmt(failedAmt+"");
+		resultBean.setFailTotalQty(failedCount+"");
+		resultBean.setSuccTotalAmt(successAmt+"");
+		resultBean.setSuccTotalQty(successCount+"");
+		resultBean.setWaitTotalAmt(payingAmt+"");
+		resultBean.setWaitTotalQty(payingCount+"");
+		return resultBean;
+	}
+	@Override
+	public BatchResultBean queryConcentratePaymentBatch(String merchNo,
+			String batchNo, String txnDate) {
+		BatchResultBean resultBean = new BatchResultBean();
+		OrderPaymentBatchDO paymentBatch = orderPaymentBatchDAO.getPaymentBatchOrder(merchNo, batchNo, txnDate);
+		List<OrderPaymentDetaDO> detaList = orderPaymentDetaDAO.getDetaListByBatchtid(paymentBatch.getTid());
+		List<FileContentBean> fileContentList = Lists.newArrayList();
+		long failedCount = 0L;
+		long failedAmt = 0L;
+		long successCount = 0L;
+		long successAmt = 0L;
+		long payingCount = 0L;
+		long payingAmt = 0L;
+		for(OrderPaymentDetaDO paymentDeta : detaList){
+			FileContentBean bean = new FileContentBean();
+			bean.setOrderId(paymentDeta.getOrderid());
+			bean.setCurrencyCode(paymentDeta.getCurrencycode());
+			bean.setAmt(paymentDeta.getAmt());
+			bean.setDebtorBank(paymentDeta.getDebtorbank());
+			bean.setDebtorAccount(paymentDeta.getDebtoraccount());
+			bean.setDebtorName(paymentDeta.getDebtorname());
+			bean.setDebtorConsign(paymentDeta.getDebtorconsign());
+			bean.setCreditorBank(paymentDeta.getCreditorbank());
+			bean.setCreditorAccount(paymentDeta.getCreditoraccount());
+			bean.setCreditorName(paymentDeta.getCreditorname());
+			bean.setProprietary(paymentDeta.getProprietary());
+			bean.setSummary(paymentDeta.getSummary());
+			OrderStatusEnum orderStatusEnum = OrderStatusEnum.fromValue(paymentDeta.getStatus());
+			if(orderStatusEnum==OrderStatusEnum.FAILED){
+				failedCount++;
+				failedAmt+=Long.valueOf(bean.getAmt()).longValue();
+				bean.setRespCode("09");
+			}else if (orderStatusEnum==OrderStatusEnum.PAYING) {
+				successCount++;
+				payingAmt+=Long.valueOf(bean.getAmt()).longValue();
+				bean.setRespCode("11");
+			}else if (orderStatusEnum==OrderStatusEnum.SUCCESS) {
+				payingCount++;
+				successAmt+=Long.valueOf(bean.getAmt()).longValue();
+				bean.setRespCode("00");
+			}
+			bean.setRespMsg(paymentDeta.getRespmsg());
+			fileContentList.add(bean);
+		}
+		resultBean.setFileContentList(fileContentList);
+		resultBean.setFailTotalAmt(failedAmt+"");
+		resultBean.setFailTotalQty(failedCount+"");
+		resultBean.setSuccTotalAmt(successAmt+"");
+		resultBean.setSuccTotalQty(successCount+"");
+		resultBean.setWaitTotalAmt(payingAmt+"");
+		resultBean.setWaitTotalQty(payingCount+"");
+		return resultBean;
+	}
+	
 
 }

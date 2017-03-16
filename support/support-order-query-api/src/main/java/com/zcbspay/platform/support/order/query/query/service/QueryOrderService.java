@@ -11,6 +11,7 @@
 package com.zcbspay.platform.support.order.query.query.service;
 
 import com.zcbspay.platform.support.order.query.exception.QueryOrderException;
+import com.zcbspay.platform.support.order.query.query.bean.BatchResultBean;
 import com.zcbspay.platform.support.order.query.query.bean.OrderResultBean;
 
 /**
@@ -46,4 +47,37 @@ public interface QueryOrderService {
 	 * @throws QueryOrderException
 	 */
 	public OrderResultBean queryInsteadPayOrder(String merchNo,String orderId)  throws QueryOrderException;
+	
+	/**
+	 * 查询实时集中代收订单
+	 * @param tn
+	 * @return
+	 * @throws QueryOrderException 
+	 */
+	public OrderResultBean queryConcentrateCollectionOrder(String tn) throws QueryOrderException;
+	
+	/**
+	 * 查询实时集中代付订单 
+	 * @param tn
+	 * @return
+	 * @throws QueryOrderException 
+	 */
+	public OrderResultBean queryConcentratePaymentOrder(String tn) throws QueryOrderException;
+	/**
+	 * 查询集中代收批次信息
+	 * @param merchNo 商户号
+	 * @param batchNo 批次号
+	 * @param txnDate 交易日期
+	 * @return
+	 */
+	public BatchResultBean queryConcentrateCollectionBatch(String merchNo,String batchNo,String txnDate);
+	
+	/**
+	 * 查询集中代付批次信息
+	 * @param merchNo 商户号
+	 * @param batchNo 批次号
+	 * @param txnDate 交易日期
+	 * @return
+	 */
+	public BatchResultBean queryConcentratePaymentBatch(String merchNo,String batchNo,String txnDate);
 }
