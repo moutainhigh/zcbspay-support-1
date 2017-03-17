@@ -279,6 +279,8 @@ public class QueryOrderServiceImpl implements QueryOrderService{
 		resultBean.setSuccTotalQty(successCount+"");
 		resultBean.setWaitTotalAmt(payingAmt+"");
 		resultBean.setWaitTotalQty(payingCount+"");
+		resultBean.setTotalAmt(collectBatch.getTotalamt()+"");
+		resultBean.setTotalQty(collectBatch.getTotalqty()+"");
 		return resultBean;
 	}
 	@Override
@@ -332,6 +334,8 @@ public class QueryOrderServiceImpl implements QueryOrderService{
 		resultBean.setSuccTotalQty(successCount+"");
 		resultBean.setWaitTotalAmt(payingAmt+"");
 		resultBean.setWaitTotalQty(payingCount+"");
+		resultBean.setTotalAmt(paymentBatch.getTotalamt()+"");
+		resultBean.setTotalQty(paymentBatch.getTotalqty()+"");
 		return resultBean;
 	}
 	
