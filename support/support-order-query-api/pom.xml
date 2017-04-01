@@ -7,9 +7,7 @@
     <artifactId>support</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <groupId>com.zcbspay.platform</groupId>
   <artifactId>support-order-query-api</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
   <name>support-order-query-api</name>
   <url>http://maven.apache.org</url>
   <properties>

@@ -270,5 +270,6 @@
     <module>support-order-query-simple</module>
     <module>support-signature</module>
     <module>support-signature-api</module>
+    <module>support-order-query-test</module>
   </modules>
 </project>
