@@ -271,5 +271,8 @@
     <module>support-signature</module>
     <module>support-signature-api</module>
     <module>support-order-query-test</module>
+    <module>support-cipher-api</module>
+    <module>support-cipher</module>
+    <module>support-cipher-simple</module>
   </modules>
 </project>
