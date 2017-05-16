@@ -274,5 +274,6 @@
     <module>support-cipher-api</module>
     <module>support-cipher</module>
     <module>support-cipher-simple</module>
+    <module>support-signature-simple</module>
   </modules>
 </project>
