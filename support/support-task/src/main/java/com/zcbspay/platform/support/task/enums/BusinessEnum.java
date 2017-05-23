@@ -39,6 +39,14 @@ public enum BusinessEnum {
     REALNAME_AUTH_NO_COST("80000002"),
     /** 转账交易流水 **/
     TRAN_DATA_NO("90000001"),
+    //实时集中代收
+    REAL_TIME_COLLECTION("11000001"),
+    //实时集中代付
+    REAL_TIME_PAYMENT("11000002"),
+    //批量集中代收
+    BATCH_COLLECTION("11000003"),
+    //批量集中代付
+    BATCH_PAYMENT("11000004"),
     UNKNOW("");//未知
     private String busiCode;
     

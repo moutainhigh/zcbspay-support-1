@@ -324,4 +324,11 @@ public class RSAUtils {
 		Key key = (Key) keyMap.get(PUBLIC_KEY);
 		return Base64Utils.encode(key.getEncoded());
 	}
+	
+	public static void main(String[] args) throws Exception {
+		
+		Map<String, Object> keyPair = genKeyPair();
+		String publicKey = getPublicKey(keyPair);
+		
+	}
 }

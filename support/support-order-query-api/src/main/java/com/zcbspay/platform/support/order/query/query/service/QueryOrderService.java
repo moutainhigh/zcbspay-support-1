@@ -69,8 +69,9 @@ public interface QueryOrderService {
 	 * @param batchNo 批次号
 	 * @param txnDate 交易日期
 	 * @return
+	 * @throws QueryOrderException 
 	 */
-	public BatchResultBean queryConcentrateCollectionBatch(String merchNo,String batchNo,String txnDate);
+	public BatchResultBean queryConcentrateCollectionBatch(String merchNo,String batchNo,String txnDate) throws QueryOrderException;
 	
 	/**
 	 * 查询集中代付批次信息
@@ -79,5 +80,5 @@ public interface QueryOrderService {
 	 * @param txnDate 交易日期
 	 * @return
 	 */
-	public BatchResultBean queryConcentratePaymentBatch(String merchNo,String batchNo,String txnDate);
+	public BatchResultBean queryConcentratePaymentBatch(String merchNo,String batchNo,String txnDate) throws QueryOrderException;
 }

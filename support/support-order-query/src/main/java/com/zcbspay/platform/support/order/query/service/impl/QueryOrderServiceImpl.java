@@ -230,9 +230,12 @@ public class QueryOrderServiceImpl implements QueryOrderService{
 	}
 	@Override
 	public BatchResultBean queryConcentrateCollectionBatch(String merchNo,
-			String batchNo, String txnDate) {
+			String batchNo, String txnDate) throws QueryOrderException{
 		BatchResultBean resultBean = new BatchResultBean();
 		OrderCollectBatchDO collectBatch = orderCollectBatchDAO.getCollectBatchOrder(merchNo, batchNo, txnDate);
+		if(collectBatch==null){
+			
+		}
 		List<OrderCollectDetaDO> detaList = orderCollectDetaDAO.getDetaListByBatchtid(collectBatch.getTid());
 		List<FileContentBean> fileContentList = Lists.newArrayList();
 		long failedCount = 0L;
@@ -285,7 +288,7 @@ public class QueryOrderServiceImpl implements QueryOrderService{
 	}
 	@Override
 	public BatchResultBean queryConcentratePaymentBatch(String merchNo,
-			String batchNo, String txnDate) {
+			String batchNo, String txnDate) throws QueryOrderException {
 		BatchResultBean resultBean = new BatchResultBean();
 		OrderPaymentBatchDO paymentBatch = orderPaymentBatchDAO.getPaymentBatchOrder(merchNo, batchNo, txnDate);
 		List<OrderPaymentDetaDO> detaList = orderPaymentDetaDAO.getDetaListByBatchtid(paymentBatch.getTid());

@@ -7,13 +7,11 @@
     <artifactId>support</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <groupId>com.zcbspay.platform</groupId>
   <artifactId>support-cipher-api</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
   <name>support-cipher-api</name>
   <url>http://maven.apache.org</url>
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.sourceEncoding>GBK</project.build.sourceEncoding>
   </properties>
   <dependencies>
     <dependency>

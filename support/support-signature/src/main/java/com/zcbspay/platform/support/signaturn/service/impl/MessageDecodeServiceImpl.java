@@ -18,7 +18,7 @@ import com.zcbspay.platform.support.signaturn.util.StringUtil;
 import com.zcbspay.platform.support.signaturn.util.security.GateKeeper;
 import com.zcbspay.platform.support.signaturn.util.security.RSAHelper;
 
-@Service
+@Service("messageDecodeService")
 public class MessageDecodeServiceImpl implements MessageDecodeService{
 	
 	private static final Logger logger = LoggerFactory.getLogger(MessageDecodeServiceImpl.class); 

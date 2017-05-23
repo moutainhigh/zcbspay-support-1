@@ -4,5 +4,7 @@
 	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-	<dubbo:service interface="com.zcbspay.platform.support.order.query.query.service.QueryOrderService" ref="queryOrderService" retries="0" version="1.0"/>
+	<dubbo:service interface="com.zcbspay.platform.support.signaturn.service.MessageDecodeService" ref="messageDecodeService" retries="0" version="1.0"/>
+	<dubbo:service interface="com.zcbspay.platform.support.signaturn.service.MessageEncryptService" ref="messageEncryptService" retries="0" version="1.0"/>
+	<dubbo:annotation package="com.zcbspay.platform.support.signaturn."/>
 </beans>

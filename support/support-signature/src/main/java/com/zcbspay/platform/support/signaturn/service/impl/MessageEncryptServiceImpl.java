@@ -20,7 +20,7 @@ import com.zcbspay.platform.support.signaturn.util.Base64Utils;
 import com.zcbspay.platform.support.signaturn.util.Md5Utils;
 import com.zcbspay.platform.support.signaturn.util.security.RSAHelper;
 
-@Service
+@Service("messageEncryptService")
 public class MessageEncryptServiceImpl implements MessageEncryptService{
 
 	@Reference(version="1.0")
