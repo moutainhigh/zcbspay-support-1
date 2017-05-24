@@ -213,7 +213,7 @@ public class QueryOrderServiceImpl implements QueryOrderService{
 	public OrderResultBean queryConcentratePaymentOrder(String tn) throws QueryOrderException {
 		OrderPaymentSingleDO orderinfo = orderPaymentSingleDAO.getOrderinfoByTn(tn);
 		if(orderinfo==null){
-			throw new QueryOrderException("PC029");
+			throw new QueryOrderException("PC004");
 		}
 		OrderResultBean order = new OrderResultBean();
 		order.setMerId(orderinfo.getMerid());
@@ -292,7 +292,7 @@ public class QueryOrderServiceImpl implements QueryOrderService{
 		BatchResultBean resultBean = new BatchResultBean();
 		OrderPaymentBatchDO paymentBatch = orderPaymentBatchDAO.getPaymentBatchOrder(merchNo, batchNo, txnDate);
 		if(paymentBatch==null){
-			throw new QueryOrderException("PC004");
+			throw new QueryOrderException("PC029");
 		}
 		List<OrderPaymentDetaDO> detaList = orderPaymentDetaDAO.getDetaListByBatchtid(paymentBatch.getTid());
 		List<FileContentBean> fileContentList = Lists.newArrayList();
