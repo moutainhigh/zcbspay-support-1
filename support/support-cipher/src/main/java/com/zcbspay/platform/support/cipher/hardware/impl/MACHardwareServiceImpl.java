@@ -22,13 +22,12 @@ public class MACHardwareServiceImpl implements MACHardwareService {
 		//E408C01308B5DFD14FE9A878A85CFAF3
 		String mac = null;
 		try {
-			
 			connectPool.initClient();
 			logger.info(data.getBytes("GBK").length+"");
 			mac= imp.hsmGenerateMAC9_9(MKIndex, MAK, data.getBytes("GBK").length, data);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 		return mac.substring(0,8).toUpperCase();
 	}

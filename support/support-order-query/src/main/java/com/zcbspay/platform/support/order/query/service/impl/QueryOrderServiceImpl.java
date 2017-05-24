@@ -213,7 +213,7 @@ public class QueryOrderServiceImpl implements QueryOrderService{
 	public OrderResultBean queryConcentratePaymentOrder(String tn) throws QueryOrderException {
 		OrderPaymentSingleDO orderinfo = orderPaymentSingleDAO.getOrderinfoByTn(tn);
 		if(orderinfo==null){
-			throw new QueryOrderException("PC004");
+			throw new QueryOrderException("PC029");
 		}
 		OrderResultBean order = new OrderResultBean();
 		order.setMerId(orderinfo.getMerid());
@@ -234,7 +234,7 @@ public class QueryOrderServiceImpl implements QueryOrderService{
 		BatchResultBean resultBean = new BatchResultBean();
 		OrderCollectBatchDO collectBatch = orderCollectBatchDAO.getCollectBatchOrder(merchNo, batchNo, txnDate);
 		if(collectBatch==null){
-			
+			throw new QueryOrderException("PC029");
 		}
 		List<OrderCollectDetaDO> detaList = orderCollectDetaDAO.getDetaListByBatchtid(collectBatch.getTid());
 		List<FileContentBean> fileContentList = Lists.newArrayList();
@@ -291,6 +291,9 @@ public class QueryOrderServiceImpl implements QueryOrderService{
 			String batchNo, String txnDate) throws QueryOrderException {
 		BatchResultBean resultBean = new BatchResultBean();
 		OrderPaymentBatchDO paymentBatch = orderPaymentBatchDAO.getPaymentBatchOrder(merchNo, batchNo, txnDate);
+		if(paymentBatch==null){
+			throw new QueryOrderException("PC004");
+		}
 		List<OrderPaymentDetaDO> detaList = orderPaymentDetaDAO.getDetaListByBatchtid(paymentBatch.getTid());
 		List<FileContentBean> fileContentList = Lists.newArrayList();
 		long failedCount = 0L;
