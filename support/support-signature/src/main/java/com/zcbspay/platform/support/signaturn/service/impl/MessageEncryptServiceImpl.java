@@ -39,7 +39,7 @@ public class MessageEncryptServiceImpl implements MessageEncryptService{
 			rsa = new RSAHelper(coopInstiMK.getZplatformPubKey(), coopInstiMK.getInstiPriKey());
 		} else {
 			MerchMK merchMk = merchMKService.get(additBean.getMerId());
-			rsa = new RSAHelper(merchMk.getLocalPubKey(), merchMk.getMemberPriKey());
+			rsa = new RSAHelper(merchMk.getMemberPubKey(), merchMk.getMemberPriKey());
 		}
 		additBean.setEncryKey(rsa.encrypt(key));
 		String signData = Md5Utils.md5(key + JSON.toJSONString(additBean) + data, "UTF-8").toUpperCase();

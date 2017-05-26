@@ -38,4 +38,15 @@ public interface BeanFactory {
 	  * @throws
 	 */
 	public NotifyBean getInsteadPayBean(String txnseqno,BusinessEnum businessEnum);
+	
+	/**
+	 * 
+	 * @param tn
+	 * @param businessEnum
+	 * @return
+	 */
+	public NotifyBean getBatchTradeBean(String tn,BusinessEnum businessEnum);
+	
+	
+	public NotifyBean getBean(String txnseqno, BusinessEnum businessEnum);
 }

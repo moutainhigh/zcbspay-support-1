@@ -10,6 +10,8 @@
  */
 package com.zcbspay.platform.support.task.bean;
 
+import com.zcbspay.platform.support.task.pojo.OrderCollectSingleDO;
+import com.zcbspay.platform.support.task.pojo.OrderPaymentSingleDO;
 import com.zcbspay.platform.support.task.pojo.PojoInsteadPayRealtime;
 import com.zcbspay.platform.support.task.pojo.PojoTxnsOrderinfo;
 
@@ -27,7 +29,7 @@ public class TradeNotifyBean {
 	private String txnType;// 交易类型
 	private String txnSubType;// 交易子类
 	private String bizType;// 产品类型
-	private String channelType;// 渠道类型
+	//private String channelType;// 渠道类型
 	private String merName;// 商户名称
 	private String orderId;// 商户订单号
 	private String txnTime;// 订单发送时间
@@ -99,18 +101,6 @@ public class TradeNotifyBean {
 	 */
 	public void setBizType(String bizType) {
 		this.bizType = bizType;
-	}
-	/**
-	 * @return the channelType
-	 */
-	public String getChannelType() {
-		return channelType;
-	}
-	/**
-	 * @param channelType the channelType to set
-	 */
-	public void setChannelType(String channelType) {
-		this.channelType = channelType;
 	}
 	/**
 	 * @return the merName
@@ -283,7 +273,6 @@ public class TradeNotifyBean {
 		this.txnType = orderinfo.getTxntype();
 		this.txnSubType = orderinfo.getTxnsubtype();
 		this.bizType = orderinfo.getBiztype();
-		this.channelType = "00";
 		this.merName = orderinfo.getSecmembername();
 		this.orderId = orderinfo.getOrderno();
 		this.txnTime = orderinfo.getOrdercommitime();
@@ -311,7 +300,6 @@ public class TradeNotifyBean {
 		this.txnType = insteadPayRealtime.getTxnType();
 		this.txnSubType = insteadPayRealtime.getTxnSubType();
 		this.bizType = insteadPayRealtime.getBizType();
-		this.channelType = "00";
 		this.merName = insteadPayRealtime.getMerName();
 		this.orderId = insteadPayRealtime.getOrderno();
 		this.txnTime = insteadPayRealtime.getOrderCommiTime();
@@ -324,6 +312,46 @@ public class TradeNotifyBean {
 		this.tn = insteadPayRealtime.getTn();
 		this.respCode = insteadPayRealtime.getRetCode();
 		this.respMsg = insteadPayRealtime.getRetInfo();
+	}
+	public TradeNotifyBean(OrderCollectSingleDO orderinfo) {
+		super();
+		this.version = "1.0";
+		this.encoding = "1";
+		this.txnType = orderinfo.getTxntype();
+		this.txnSubType = orderinfo.getTxnsubtype();
+		this.bizType = orderinfo.getBiztype();
+		this.merName = orderinfo.getMername();
+		this.orderId = orderinfo.getOrderid();
+		this.txnTime = orderinfo.getTxntime();
+		//this.payTimeout = insteadPayRealtime.get;
+		this.txnAmt = orderinfo.getTxnamt()+"";
+		this.currencyCode = orderinfo.getCurrencycode();
+		this.orderDesc = orderinfo.getOrderdesc();
+		this.reserved = orderinfo.getNotes();
+		this.orderStatus = orderinfo.getStatus();
+		this.tn = orderinfo.getTn();
+		this.respCode = orderinfo.getRespcode();
+		this.respMsg = orderinfo.getRespmsg();
+	}
+	public TradeNotifyBean(OrderPaymentSingleDO orderinfo) {
+		super();
+		this.version = "1.0";
+		this.encoding = "1";
+		this.txnType = orderinfo.getTxntype();
+		this.txnSubType = orderinfo.getTxnsubtype();
+		this.bizType = orderinfo.getBiztype();
+		this.merName = orderinfo.getMername();
+		this.orderId = orderinfo.getOrderid();
+		this.txnTime = orderinfo.getTxntime();
+		//this.payTimeout = insteadPayRealtime.get;
+		this.txnAmt = orderinfo.getTxnamt()+"";
+		this.currencyCode = orderinfo.getCurrencycode();
+		this.orderDesc = orderinfo.getOrderdesc();
+		this.reserved = orderinfo.getNotes();
+		this.orderStatus = orderinfo.getStatus();
+		this.tn = orderinfo.getTn();
+		this.respCode = orderinfo.getRespcode();
+		this.respMsg = orderinfo.getRespmsg();
 	}
 	
 }

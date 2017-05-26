@@ -39,6 +39,7 @@ public class AsynHttpRequestThread implements Runnable {
 	private final String memberId;
 	private final String txnseqno;
 	private final String sendUrl;
+	private final String tradeType;
 	private final List<NameValuePair> params;
 	//private TxnsNotifyTaskDAO txnsNotifyTaskDAO = (TxnsNotifyTaskDAO) SpringContext.getContext().getBean("txnsNotifyTaskDAO");;
 	private TradeQueueService tradeQueueService = (TradeQueueService) SpringContext.getContext().getBean("tradeQueueService");
@@ -56,6 +57,7 @@ public class AsynHttpRequestThread implements Runnable {
 		this.txnseqno = txnseqno;
 		this.sendUrl = sendUrl;
 		this.params = list;
+		this.tradeType = null;
 	}
 
 	public AsynHttpRequestThread(String memberId, String txnseqno,
@@ -65,14 +67,15 @@ public class AsynHttpRequestThread implements Runnable {
 		this.txnseqno = txnseqno;
 		this.sendUrl = sendUrl;
 		this.params = bean.getNotifyParam();
-		
+		this.tradeType = null;
 	}
-	public AsynHttpRequestThread(String memberId, String txnseqno,NotifyBean bean ) {
+	public AsynHttpRequestThread(String memberId, String txnseqno,NotifyBean bean,String tradeType ) {
 		super();
 		this.memberId = memberId;
 		this.txnseqno = txnseqno;
 		this.sendUrl = bean.getNotifyURL();
 		this.params = bean.getNotifyParam();
+		this.tradeType = tradeType;
 		
 	}
 	@Override
@@ -122,6 +125,7 @@ public class AsynHttpRequestThread implements Runnable {
 			log.info("sync notify success complete :" + txnseqno);
 		}
 		NotifyTaskBean notifyTaskBean = new NotifyTaskBean(memberId, txnseqno, 1, 5,"", sendStatus, resultBean.getErrCode(), sendUrl, "1");
+		notifyTaskBean.setTradeType(tradeType);
 		tradeQueueService.addNotifyQueue(notifyTaskBean);
 	}
 }

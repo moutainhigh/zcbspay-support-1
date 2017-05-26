@@ -27,6 +27,7 @@ public class PojoTxnsNotifyTask implements java.io.Serializable {
     private String httpRescode;
     private String notifyUrl;
     private String taskType;
+    private String tradeType;
     public PojoTxnsNotifyTask() {
     }
 
@@ -156,5 +157,13 @@ public class PojoTxnsNotifyTask implements java.io.Serializable {
     public void setTaskType(String taskType) {
         this.taskType = taskType;
     }
+    @Column(name = "TARDE_TYPE", length = 1)
+	public String getTradeType() {
+		return tradeType;
+	}
+
+	public void setTradeType(String tradeType) {
+		this.tradeType = tradeType;
+	}
 
 }

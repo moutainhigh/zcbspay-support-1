@@ -22,6 +22,7 @@ public class NotifyTaskBean implements java.io.Serializable {
     private String httpRescode;
     private String notifyUrl;
     private String taskType;
+    private String tradeType;
     public NotifyTaskBean() {
     }
 
@@ -134,6 +135,14 @@ public class NotifyTaskBean implements java.io.Serializable {
 
 	public void setTaskType(String taskType) {
 		this.taskType = taskType;
+	}
+
+	public String getTradeType() {
+		return tradeType;
+	}
+
+	public void setTradeType(String tradeType) {
+		this.tradeType = tradeType;
 	}
     
 
